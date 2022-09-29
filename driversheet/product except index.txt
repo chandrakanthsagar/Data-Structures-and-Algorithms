@@ -1,0 +1,55 @@
+import java.util.*;
+public class Main{
+    public static ArrayList<Integer> getproduct(int nums[]){
+        int n=nums.length;
+        int left[]=new int[n];
+        int right[]=new int[n];
+        Arrays.fill(left,1);
+        Arrays.fill(right,1);
+    
+        
+        ArrayList<Integer> k=new ArrayList<>();
+        
+        for(int i=1;i<n;i++){
+            left[i]=left[i-1]*nums[i-1];
+        }
+       
+       int t;
+        for (int i = 0; i < n / 2; i++) {
+            t = nums[i];
+            nums[i] = nums[n - i - 1];
+            nums[n - i - 1] = t;
+        }
+         
+        for(int i=1;i<n;i++){
+            right[i]=right[i-1]*nums[i-1];
+            
+        }
+         for (int i = 0; i < n / 2; i++) {
+            t = right[i];
+            right[i] = right[n - i - 1];
+            right[n - i - 1] = t;
+        }
+        
+        
+         
+        for(int i=1;i<=n;i++){
+            k.add(left[i-1]*right[i-1]);
+        }
+        return k;
+        
+    }
+    public static void main (String args[]){
+        Scanner sc=new Scanner (System.in);
+        int n=sc.nextInt();
+        int a[]=new int[n];
+        for(int i=0;i<n;i++){
+            a[i]=sc.nextInt();
+        }
+        ArrayList<Integer> t=null;
+        t=getproduct(a);
+        for (int i=0;i<t.size();i++){
+            System.out.println(t.get(i));
+        }
+    }
+}
